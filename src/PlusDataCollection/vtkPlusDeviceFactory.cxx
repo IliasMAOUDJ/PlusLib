@@ -238,6 +238,10 @@ See License.txt for details.
 #include "vtkPlusClariusOEM.h"
 #endif
 
+#ifdef PLUS_USE_PHILIPSINTELLIVUE
+#include "vtkPlusIntelliVue.h"
+#endif
+
 //----------------------------------------------------------------------------
 
 vtkStandardNewMacro(vtkPlusDeviceFactory);
@@ -441,6 +445,10 @@ RegisterDevice("GenericSensor", "vtkPlusGenericSensorTracker", (PointerToDevice)
 
 #ifdef PLUS_USE_REVOPOINT3DCAMERA
     RegisterDevice("Revopoint3DCamera", "vtkPlusRevopoint3DCamera", (PointerToDevice)& vtkPlusRevopoint3DCamera::New);
+#endif
+
+#ifdef PLUS_USE_PHILIPSINTELLIVUE
+    RegisterDevice("PhilipsIntelliVue", "vtkPlusIntelliVue", (PointerToDevice)& vtkPlusIntelliVe::New);
 #endif
 
     // Virtual Devices

@@ -1,0 +1,30 @@
+/*!
+\page DevicePhilipsIntellivue Philips Intellivue monitor
+This device allow you to process collect Numerical and Waveforms from Philips Intellivue monitors
+
+\section DevicePhilipsIntellivueSupportedHwDevices Supported hardware devices
+
+- Link to manufacturer's website: https://www.documents.philips.com/doclib/enc/fetch/2000/4504/577242/577243/577247/582636/582882/X2%2C_MP%2C_MX_&_FM_Series_Rel._L.0_Data_Export_Interface_Program._Guide_4535_645_88011_(ENG).pdf
+
+\section DevicePhilipsIntellivueSupportedPlatforms Supported platforms
+
+- \ref PackageLinux (Ubuntu 20.04)
+
+\section DeviceAzureKinectConfigSettings Device configuration settings
+
+- \xmlAtt \ref DeviceType "Type" = \c "IntelliVue" \RequiredAtt
+- \xmlAtt Signs Choose which signs to retrieve. \OptionalAtt{FALSE}
+
+- \xmlElem \ref DataSources One \c DataSource child element is required per stream from the Philips Intellivue. \RequiredAtt
+  - \xmlElem \ref DataSource \RequiredAtt
+  - \xmlAtt FrameType Type of stream to capture. \RequiredAtt
+    - \c Wave
+    - \c Numerical
+  - \xmlAtt FrameRate Acquisition frequence for this stream. (Default value: 30).
+  - \xmlAtt \ref SerialPort Which serial port to connect to. \RequiredAtt
+
+\section DevicePhilipsIntellivueExampleConfigFile Example configuration file PlusDeviceSet_Server_PhilipsIntellivue.xml
+
+\include "ConfigFiles/PlusDeviceSet_Server_PhilipsIntellive.xml" 
+
+*/

@@ -69,6 +69,7 @@ OPTION(PLUS_USE_PICOSCOPE "Provide support for PicoScope 2xxx series oscilloscop
 OPTION(PLUS_USE_AZUREKINECT "Provide support the Kinect Azure RGB-D camera" OFF)
 OPTION(PLUS_USE_REVOPOINT3DCAMERA "Provide support Revopoint 3D cameras" OFF)
 OPTION(PLUS_USE_GENERIC_SENSOR_TRACKER "Provide support for generic sensor data collection" OFF)
+OPTION(PLUS_USE_PHILIPSINTELLIVUE "Provide support for Philips Intellivue monitors" OFF)
 
 OPTION(PLUS_TEST_ULTRASONIX "Enable testing of acquisition from Ultrasonix ultrasound systems. Enable this only if an Ultrasonix device accessible from this computer." OFF)
 IF(PLUS_TEST_ULTRASONIX)
@@ -2567,6 +2568,33 @@ IF(PLUS_USE_REVOPOINT3DCAMERA)
     ${REVOPOINT3DSDK_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}3DCamera${CMAKE_SHARED_LIBRARY_SUFFIX}
     ${REVOPOINT3DSDK_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}HandEye${CMAKE_SHARED_LIBRARY_SUFFIX}
   )
+ENDIF()
+# --------------------------------------------------------------------------
+# Philips Intellivue
+IF(PLUS_USE_PHILIPSINTELLIVUE)
+  SET(PHILIPSINTELLIVUE_SRCS
+      PhilipsIntellivue/vtkPlusIntellivue.cxx
+    )
+  SET(PHILIPSINTELLIVUE_HDRS
+      PhilipsIntellivue/vtkPlusIntellivue.h
+    )
+
+  LIST(APPEND ${PROJECT_NAME}_HDRS
+    ${PHILIPSINTELLIVUE_HDRS}
+    )
+
+  LIST(APPEND ${PROJECT_NAME}_SRCS
+    ${PHILIPSINTELLIVUE_SRCS}
+    )
+
+  LIST(APPEND ${PROJECT_NAME}_INCLUDE_DIRS
+    ${CMAKE_CURRENT_SOURCE_DIR}/PhilipsIntellivue
+  )
+
+  LIST(APPEND ${PROJECT_NAME}_PRIVATE_LIBS
+    ${PHILIPSINTELLIVUE_LIBRARIES}
+  )
+
 ENDIF()
 
 # --------------------------------------------------------------------------

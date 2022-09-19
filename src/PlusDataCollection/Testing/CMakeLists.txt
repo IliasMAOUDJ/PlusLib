@@ -649,6 +649,20 @@ IF(PLUS_USE_REVOPOINT3DCAMERA)
   SET_TESTS_PROPERTIES(Revopoint3DCameraTest1 PROPERTIES FAIL_REGULAR_EXPRESSION "ERROR")
 ENDIF()
 
+#*************************** Philips Intellivue monitors ***************************
+IF(PLUS_USE_PHILIPSINTELLIVUE)
+  ADD_EXECUTABLE(PhilipsIntellivueTest1 vtkPhilipsIntellivueTest.cxx)
+  SET_TARGET_PROPERTIES(PhilipsIntellivueTest1 PROPERTIES FOLDER Tests)
+  TARGET_LINK_LIBRARIES(PhilipsIntellivueTest1 vtkPlusDataCollection)
+
+  ADD_TEST(PhilipsIntellivueTest1
+    ${PLUS_EXECUTABLE_OUTPUT_PATH}/PhilipsIntellivueTest1
+    --rendering-off
+    --config-file=${ConfigFilesDir}/Testing/PlusDeviceSet_DataCollectionOnly_PhilipsIntellivue.xml
+    )
+  SET_TESTS_PROPERTIES(PhilipsIntellivueTest1 PROPERTIES FAIL_REGULAR_EXPRESSION "ERROR;WARNING")
+ENDIF()
+
 # --------------------------------------------------------------------------
 # Install
 #

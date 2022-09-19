@@ -1,0 +1,75 @@
+<PlusConfiguration version="2.9">
+  <DataCollection StartupDelaySec="1.0">
+  <Device
+  	Id="Nimbus"
+  	Type="SerialDeviceLinux"
+  	SerialPort="dev/pts/3"
+  	LineEnding="0a" 
+  	FieldDataSource = "NimbusData">
+  	<DataSources>
+  	  <DataSource Id="NimbusData" Type="FieldData"/>
+  	</DataSources>
+  	<OutputChannels>
+  	  <OutputChannel Id="NimbusChannel">
+  	    <DataSource Id= "NimbusData"/>
+  	  </OutputChannel>
+  	</OutputChannels>
+  </Device>
+
+
+<Device 
+      Id="SerialDevice"
+      Type="IntelliVue"
+      SerialPort="tmp/ttyIntellivue"
+      BaudRate="115200"
+      ToolReferenceFrame="0"
+      AcquisitionRate="30"
+      Signs="ECG_ELEC_POTL_II,PRESS_BLD_ART_ABP,PRESS_BLD_ART,PULS_OXIM_PLETH,PRESS_BLD_VEN_CENT,RESP"
+      >
+      <DataSources>
+        <DataSource Id="WaveData" Type="FieldData" />
+        <DataSource Id="NumData" Type="FieldData" />
+      </DataSources>
+      <OutputChannels>
+        <OutputChannel Id="WaveChannel" >
+          <DataSource Id="WaveData"/>
+        </OutputChannel>
+        <OutputChannel Id="NumChannel" >
+          <DataSource Id="NumData"/>
+        </OutputChannel>
+      </OutputChannels>
+    </Device>
+  </DataCollection>
+
+	<PlusOpenIGTLinkServer MaxNumberOfIgtlMessagesToSend="1" MaxTimeSpentWithProcessingMs="30" ListeningPort="18946" LogWarningOnNoDataAvailable="false" OutputChannelId="NimbusChannel" >
+			<DefaultClientInfo> 
+				<MessageTypes> 
+					<Message Type="STRING" />
+				</MessageTypes>
+				<StringNames>
+					<String Name="NimbusData" />
+				</StringNames>
+			</DefaultClientInfo>
+		</PlusOpenIGTLinkServer>
+		
+	<PlusOpenIGTLinkServer MaxNumberOfIgtlMessagesToSend="1" MaxTimeSpentWithProcessingMs="30" ListeningPort="18947" LogWarningOnNoDataAvailable="false" OutputChannelId="NumChannel" >
+		<DefaultClientInfo> 
+			<MessageTypes> 
+				<Message Type="STRING" />
+			</MessageTypes>
+			<StringNames>
+				<String Name="NumData" />
+			</StringNames>
+		</DefaultClientInfo>
+	</PlusOpenIGTLinkServer>
+	<PlusOpenIGTLinkServer MaxNumberOfIgtlMessagesToSend="4" MaxTimeSpentWithProcessingMs="30" ListeningPort="18948" LogWarningOnNoDataAvailable="false" OutputChannelId="WaveChannel" >
+		<DefaultClientInfo> 
+			<MessageTypes> 
+				<Message Type="STRING" />
+			</MessageTypes>
+			<StringNames>
+				<String Name="WaveData" />
+			</StringNames>
+		</DefaultClientInfo>
+	</PlusOpenIGTLinkServer>
+</PlusConfiguration>
